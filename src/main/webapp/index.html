@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Native WebSocket Example</title>
+</head>
+<body>
+	<script>
+		// 웹소켓 전역 객체 생성
+		const ws = new WebSocket("ws://localhost:8080");
+
+		// 연결이 수립되면 서버에 메시지를 전송한다
+		ws.onopen = function(event) {
+			ws.send("Client message: Hi!");
+			
+			// send 할 때 등급을 함께 send 시키도록 한다.
+			// ;
+		}
+
+		// 서버로 부터 메시지를 수신한다
+		ws.onmessage = function(event) {
+			if (!"Notification" in window) {
+				alert("This browser does not support desktop notification");
+			} else if (Notification.permission === "granted") {
+				var notification = new Notification(event.data);
+			} else if (Notification.permission !== 'denied') {
+				Notification.requestPermission(function(permission) {
+
+					if (!('permission' in Notification)) {
+						Notification.permission = permission;
+					}
+
+					if (permission === "granted") {
+						var notification = new Notification(event.data);
+					}
+				});
+			}
+			//console.log("Server message: ", event.data);
+		}
+
+		// error event handler
+		ws.onerror = function(event) {
+			console.log("Server error message: ", event.data);
+		}
+	</script>
+</body>
+</html>
