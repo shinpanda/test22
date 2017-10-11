@@ -1,0 +1,70 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Your First WebSocket!</title>
+</head>
+<body>
+        <script type="text/javascript">
+           
+            
+           
+            window.addEventListener("load", function() {
+            	var wsUri = "ws://localhost/web/echo";
+            	var output = document.querySelector("#output");
+				var sendButton = document.querySelector('form > input[type="button"]');
+				
+				sendButton.onclick = function() {
+					const ws = new WebSocket(wsUri);
+					var textID = document.getElementById("textID");
+	                ws.onopen = function(evt) {
+	                	ws.send(textID.value);
+	                };
+	                ws.onmessage = function(evt) {
+	                	var pre = document.createElement("p");
+	                	pre.textContent = evt.data;
+	                    //pre.innerHTML = evt.data;
+	                    console.log(evt.data);
+	                    
+	                    output.appendChild(pre);
+	                    
+	                    if (!"Notification" in window) {
+	        				alert("This browser does not support desktop notification");
+	        			} else if (Notification.permission === "granted") {
+	        				var notification = new Notification(event.data);
+	        			} else if (Notification.permission !== 'denied') {
+	        				Notification.requestPermission(function(permission) {
+
+	        					if (!('permission' in Notification)) {
+	        						Notification.permission = permission;
+	        					}
+
+	        					if (permission === "granted") {
+	        						var notification = new Notification(evt.data);
+	        					}
+	        				});
+	        			}
+	                };
+	                ws.onerror = function(evt) {
+	                	var pre = document.createElement("p");
+	                    pre.style.wordWrap = "break-word";
+	                    pre.innerHTML = "error";
+	                    
+	                    output.appendChild(pre);
+	                };
+				};
+			});
+	           
+           
+           // window.addEventListener("load", init, false);
+        </script>
+        <h1 style="text-align: center;">Hello World WebSocket Client</h1>
+        <br>
+        <div style="text-align: center;">
+            <form action="">
+                <input value="Send" type="button">
+                <input id="textID" name="message" value="Hello WebSocket!" type="text"><br>
+            </form>
+        </div>
+        <div id="output"></div>
+</body>
+</html>
