@@ -64,7 +64,7 @@ public class Test {
 		while(it.hasNext()) {
 			String stu = (String)it.next();
 			++count;
-			System.out.print(stu +" "+ student.get(stu));
+			System.out.print(stu +" : "+ student.get(stu));
 			
 			if(count == y) {
 				System.out.println();
