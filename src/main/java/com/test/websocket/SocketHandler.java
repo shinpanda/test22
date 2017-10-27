@@ -15,6 +15,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class SocketHandler extends TextWebSocketHandler implements InitializingBean {
 	//private final Logger logger = LogManager.getLogger(getClass());
+	// 서버에 연결한 사용자들을 저장하는 리스트
 	private List<WebSocketSession> list;
 
 	public SocketHandler() {
@@ -24,7 +25,8 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 		System.out.println("create SocketHandler instance!");
 	}
 
-	// WebSocket ������ ������ ����� �غ�� �� ȣ��
+	// WebSocket 연결이 열리고 사용이 준비될 때 호출
+	// WebSocket 클라이언트에서 접속을 하여 성공할 경우 발생하는 이벤트
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
@@ -35,7 +37,8 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 		System.out.println("add session!");
 	}
 
-	// Ŭ���̾�Ʈ�κ��� �޽����� �������� �� ȣ��
+	// 클라이언트로부터 메시지가 도착했을 때 호출
+	// 클라이언트에서 send()해서 메시지 발송을 한 경우 이벤트
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// TODO Auto-generated method stub
@@ -97,8 +100,8 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 
 		thread.start();*/
 	}
-
-	// ������ ������ �� ȣ��
+	// 연결이 닫혔을 때 호출
+	// 클라이언트에서 연결을 종료할 경우 발생하는 이벤트
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);

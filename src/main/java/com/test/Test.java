@@ -17,8 +17,8 @@ public class Test {
 		int x = 0;
 		int y = 0;
 		HashMap<String, Integer> student = new HashMap<String, Integer>();
-		// µ¥ÀÌÅÍ·Î Å°°ªÀ» ÇĞ»ı ÀÌ¸§À¸·Î ¼ÂÆÃ
-		// ³ªÁß¿¡ ·£´ı µ¹¸° µÚ¿¡ ÇØ´ç°ªÀ¸·Î  value ¼ÂÆÃ
+		// ë°ì´í„°ë¡œ í‚¤ê°’ì„ í•™ìƒ ì´ë¦„ìœ¼ë¡œ ì…‹íŒ…
+		// ë‚˜ì¤‘ì— ëœë¤ ëŒë¦° ë’¤ì— í•´ë‹¹ê°’ìœ¼ë¡œ value ì…‹íŒ…
 		
 		
 		int s = 0;
